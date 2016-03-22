@@ -26,7 +26,6 @@ public class TargetSpawner : MonoBehaviour
             
             GameObject copy = Instantiate(target, transform.position, transform.rotation) as GameObject;
             TargetHealth targetScript = copy.gameObject.GetComponent<TargetHealth>();
-            targetScript.level = level;
 
             currentCooldown = cooldown;
 

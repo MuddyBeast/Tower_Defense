@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class TargetHealth : MonoBehaviour
 {
-    public int level;
-    public int health;
+    float health;
+    public float startHealth;
+    public float lifeTime;
     List<Turret> turretsInRange = new List<Turret>();
+
+    public Image healthBar;
 
     // Use this for initialization
     void Start()
     {
-        health *= level;
+        health = startHealth;
     }
 
     // Update is called once per frame
@@ -25,6 +29,8 @@ public class TargetHealth : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        healthBar.fillAmount = health / startHealth;
     }
 
     void OnTriggerEnter(Collider other)

@@ -7,6 +7,7 @@ public class Turret : MonoBehaviour
     public float rotationSpeed;
     public List<GameObject> targets = new List<GameObject>();
     public List<float> distances = new List<float>();
+
     public bool shoot;
     public int shotCooldown, shotDamage;
     public float shotSpeed;
@@ -36,15 +37,18 @@ public class Turret : MonoBehaviour
                     Sort();
             }
 
+            /* * targets[0].GetComponent<TargetMovementBasic>().speed) / shotSpeed);*/
 
             var targetRotation = Quaternion.LookRotation(targets[0].transform.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-            Vector3 length = targets[0].transform.position - transform.position;
+            Vector3 relativeTargetPosition = targets[0].transform.position - transform.position;
             Vector3 direction = transform.forward;
 
+            //Debug.Log(Vector3.Angle(transform.position, targets[0].transform.position));
+            
 
-            if (Vector3.Angle(length, direction) < 10)
+            if (Vector3.Angle(relativeTargetPosition, direction) < 10)
                 shoot = true;
             else
                 shoot = false;
